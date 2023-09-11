@@ -3,6 +3,9 @@ import json
 import re
 import argparse
 
+import os 
+SCRIPTDIR=os.path.dirname(os.path.abspath(__file__))
+
 def abbreviate(line, journal_to_abbr):
     if re.search('".*"', line) is not None:
         journal_name_template = '"{}"'
@@ -37,7 +40,7 @@ if __name__ == '__main__':
     parser.add_argument('--user-json', type=str, default=None, help="customized json file")
     args = parser.parse_args()
 
-    with open('journals.json') as fin:
+    with open(os.path.join(SCRIPTDIR,'journals.json')) as fin:
         journal_to_abbr = json.load(fin)
 
     if args.user_json is not None:
